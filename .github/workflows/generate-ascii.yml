@@ -1,29 +1,31 @@
-name: My First Workflow
+name: Artifact Practice
 
 on: push
 
 jobs:
   first_job:
-    needs: second_job
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: First job message
-        run: echo "Hello from job 1"
+      - name: Create text file
+        run: echo "Hello from job 1" > job1.txt
 
-      - name: List files
-        run: ls
+      - name: Upload artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: job1-artifact
+          path: job1.txt
 
   second_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: job1-artifact
+          path: job1.txt
 
-      - name: Second job message
-        run: echo "Hello from job 2"
-
-      - name: Check current directory
-        run: pwd
+      - name: Read file
+        run: cat job1.txt
