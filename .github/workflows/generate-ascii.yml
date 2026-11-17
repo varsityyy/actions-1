@@ -1,18 +1,30 @@
-name: gen ascii workflow
+name: My First Workflow
 
 on: push
 
 jobs:
-    ascii_job:
-        runs-on: ubuntu-latest
-        steps:
-            - name: checkout repo
-              uses: actions/checkout@v4
+  first_job:
+    needs: second_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-            - name: list repo files
-              run: ls -ltra
+      - name: First job message
+        run: echo "Hello from job 1"
 
-            - name: exec shell script
-              run: |
-                chmod +x ascii-script.sh
-                ./ascii-script.sh
+      - name: List files
+        run: ls
+
+  second_job:
+    needs: first_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Second job message
+        run: echo "Hello from job 2"
+
+      - name: Check current directory
+        run: pwd
