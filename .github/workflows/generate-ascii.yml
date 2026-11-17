@@ -13,7 +13,7 @@ jobs:
         run: echo "Hello from job 1" > job1.txt
 
       - name: Upload artifact
-        uses: actions/download-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: job1-artifact
           path: job1.txt
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/download-artifact@v4
         with:
           name: job1-artifact
           path: job1.txt
