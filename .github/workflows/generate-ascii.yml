@@ -10,7 +10,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: install cowsay program
-              run: sudo apt get install cowsay -y
+              run: sudo apt-get install cowsay -y
 
             - name: execute cosay cmd
               run: cowsay -f dragon "run run runnnnnnnnn, i am a DRAGON... rawwrwrwwrwrr" >> dragon.txt
